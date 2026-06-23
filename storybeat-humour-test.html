@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>StoryBeat — Humour (test)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0a10;--card:#1c1926;--card-hi:#26212f;
+    --pink:#ff3aa8;--violet:#9b4dff;--cyan:#1fd6ff;--white:#fff;
+    --muted:rgba(255,255,255,.6);--line:rgba(255,255,255,.14);
+    --grad:linear-gradient(90deg,#ff3aa8 0%,#9b4dff 100%);
+    --grad3:linear-gradient(90deg,#ff3aa8 0%,#9b4dff 50%,#1fd6ff 100%);
+    --display:'Sora',sans-serif;--body:'Manrope',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    background:
+      radial-gradient(1200px 600px at 50% -10%, rgba(155,77,255,.20), transparent 60%),
+      radial-gradient(900px 500px at 90% 110%, rgba(31,214,255,.12), transparent 55%),
+      var(--bg);
+    color:var(--white);font-family:var(--body);-webkit-font-smoothing:antialiased;
+    min-height:100dvh;display:flex;flex-direction:column;
+  }
+  .wrap{width:100%;max-width:560px;margin:0 auto;padding:22px 20px calc(28px + env(safe-area-inset-bottom));flex:1;display:flex;flex-direction:column}
+  header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .logo{font-family:var(--display);font-weight:800;font-style:italic;font-size:20px;letter-spacing:.5px;line-height:1}
+  .logo .b{background:var(--grad3);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .wave{display:flex;align-items:flex-end;gap:3px;height:22px;margin-left:2px}
+  .wave span{width:3px;border-radius:3px;background:var(--grad3);animation:bounce 1.1s ease-in-out infinite}
+  .wave span:nth-child(1){height:8px;animation-delay:0s}.wave span:nth-child(2){height:18px;animation-delay:.12s}
+  .wave span:nth-child(3){height:11px;animation-delay:.24s}.wave span:nth-child(4){height:22px;animation-delay:.36s}
+  .wave span:nth-child(5){height:7px;animation-delay:.48s}
+  @keyframes bounce{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
+  .progress{height:4px;border-radius:99px;background:rgba(255,255,255,.10);overflow:hidden;margin-bottom:24px}
+  .progress i{display:block;height:100%;width:0;border-radius:99px;background:var(--grad3);transition:width .45s cubic-bezier(.5,0,.1,1)}
+
+  .stage{flex:1}
+  .step{animation:enter .38s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes enter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .eyebrow{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--pink)}
+  h1{font-family:var(--display);font-weight:700;font-size:25px;line-height:1.2;letter-spacing:-.3px;margin-bottom:6px}
+  .screen-sub{color:var(--muted);font-size:15px;line-height:1.5;margin-bottom:6px}
+
+  .intro{padding-top:6px}
+  .intro h1{font-size:30px;margin-bottom:14px}
+  .intro p{color:var(--muted);font-size:16px;line-height:1.6;margin-bottom:14px}
+  .intro b{color:var(--white)}
+  .intro .em{background:var(--grad3);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
+
+  .block{margin-top:24px}
+  .block:first-of-type{margin-top:22px}
+  .qlabel{display:block;font-family:var(--body);font-weight:700;font-size:16px;line-height:1.35;margin-bottom:12px;color:var(--white)}
+  .qhint{color:var(--muted);font-weight:500;font-size:13.5px;margin-top:-6px;margin-bottom:12px;display:block}
+
+  .opts{display:flex;flex-direction:column;gap:10px}
+  .opt{appearance:none;text-align:left;cursor:pointer;color:var(--white);background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:15px 16px;font-family:var(--body);font-size:16px;font-weight:600;display:flex;align-items:center;gap:12px;transition:transform .1s,border-color .18s,background .18s}
+  .opt:hover{border-color:rgba(255,255,255,.32);background:var(--card-hi)}
+  .opt:active{transform:scale(.99)}
+  .opt.sel{background:rgba(255,58,168,.12);border-color:var(--pink)}
+  .opt.sel::after{content:"";margin-left:auto;width:20px;height:20px;border-radius:50%;background:var(--grad);flex:none;box-shadow:0 0 0 4px rgba(255,58,168,.15)}
+
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{appearance:none;cursor:pointer;color:var(--white);background:var(--card);border:1.5px solid var(--line);border-radius:99px;padding:11px 16px;font-family:var(--body);font-size:15px;font-weight:600;line-height:1;transition:transform .1s,filter .15s,opacity .15s}
+  .chip:hover{border-color:rgba(255,255,255,.32)}
+  .chip:active{transform:scale(.96)}
+  .chip.sel{border-color:transparent;background:var(--grad);color:#fff;font-weight:700}
+  .chip.sel::before{content:"✓ "}
+  .chip.locked{opacity:.4;cursor:not-allowed}
+
+  .field{width:100%;background:var(--card);border:1.5px solid var(--line);border-radius:14px;color:var(--white);font-family:var(--body);font-size:16px;padding:15px;resize:none;line-height:1.5;transition:border-color .18s,background .18s}
+  .field::placeholder{color:rgba(255,255,255,.4)}
+  .field:focus{outline:none;border-color:var(--violet);background:var(--card-hi)}
+  textarea.field{min-height:74px}
+  .addlabel{font-size:13px;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+  .addlabel::before{content:"＋";color:var(--cyan);font-weight:700}
+
+  .nav{display:flex;align-items:center;gap:12px;margin-top:30px}
+  .btn{appearance:none;cursor:pointer;border:none;font-family:var(--display);font-weight:700;font-size:16px;color:#0b0a10;background:var(--white);border-radius:14px;padding:15px 24px;flex:1;letter-spacing:.2px;transition:transform .12s}
+  .btn:active{transform:scale(.98)}
+  .btn.cta{background:var(--grad3);color:#fff}
+  .back{background:none;border:1.5px solid var(--line);color:var(--muted);cursor:pointer;font-size:20px;line-height:1;padding:13px 17px;border-radius:14px}
+  .back:hover{color:var(--white);border-color:rgba(255,255,255,.32)}
+  .back[hidden]{display:none}
+
+  .final{text-align:center}
+  .final .big{font-size:46px;margin-bottom:10px}
+  .recap{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:4px 16px;margin:20px 0 6px;font-size:14.5px}
+  .recap .row{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .recap .row:last-child{border-bottom:none}
+  .recap .k{color:var(--muted);flex:none;max-width:42%}.recap .v{text-align:right;font-weight:600}
+  .delay{margin-top:14px;color:var(--muted);font-size:14px}.delay b{color:var(--white)}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">STORY<span class="b">BEAT</span></div>
+    <div class="wave" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+  </header>
+  <div class="progress"><i id="bar"></i></div>
+  <div class="stage" id="stage"></div>
+  <div class="nav">
+    <button class="back" id="back" hidden aria-label="Retour">‹</button>
+    <button class="btn" id="next">Continuer</button>
+  </div>
+</div>
+
+<script>
+const EYEBROW="😆 Humour";
+const INTRO={title:"On va bien rire. C'est tout le but."};
+const SCREENS=[
+  { title:"On charrie qui ?", sub:"Avec amour, évidemment.", blocks:[
+    {type:"text", key:"prenom", label:"Le prénom de la victime (avec amour)", ph:"Ex : Greg"},
+    {type:"choice", key:"sexe", label:"C'est…", o:["Un homme","Une femme","Un garçon","Une fille"]},
+    {type:"choice", key:"occasion", label:"C'est pour quelle occasion ?", o:["Un anniversaire","Un pot de départ","Un mariage / EVJF-EVG","Juste pour le fun","Un défi entre potes"]},
+    {type:"choice", key:"role", label:"Toi, tu es…", o:["Son ami·e","Son/sa collègue","Son conjoint","Sa famille","Toute la bande"]},
+    {type:"text", key:"offrant", label:"Ton prénom", ph:"Ex : Naïm"},
+    {type:"free", key:"lien_libre", ph:"Ajouter un mot…"}
+  ]},
+  { title:"Sa légende.", sub:"L'histoire qu'on ressort à chaque fois.", blocks:[
+    {type:"area", key:"moment", label:"L'anecdote qui fait rire tout le monde à son sujet", ph:"Ex : la fois où il s'est perdu dans son propre quartier pendant 2h"},
+    {type:"multi", key:"manie", label:"Sa manie la plus drôle", o:["Toujours en retard","Accro à son téléphone","Raconte 10× la même histoire","Roi/Reine de la sieste","Chante faux","Radin sur l'addition","Se vante tout le temps","Tombe amoureux·se toutes les semaines"]},
+    {type:"free", key:"moment_libre", ph:"Autre chose à ajouter…"}
+  ]},
+  { title:"Son personnage.", sub:"Le rôle qu'il/elle joue dans la bande.", blocks:[
+    {type:"multi", key:"perso", label:"Son style de personnage", o:["Le boute-en-train","Le/la maladroit·e","Le/la flemmard·e assumé·e","La drama queen","Le radin attachant","L'éternel·le ado","Le/la tête en l'air","Le·la dragueur·se du dimanche"]},
+    {type:"text", key:"signature", label:"Sa phrase culte ou son surnom ridicule", ph:"Ex : il dit « c'est carré » à tout bout de champ"},
+    {type:"free", key:"signature_libre", ph:"Autre chose à ajouter…"}
+  ]},
+  { title:"Le type d'humour.", sub:"On dose le rire, jamais la méchanceté.", blocks:[
+    {type:"multi", key:"ton", label:"On part sur quel ton ?", o:["Gentiment moqueur","Absurde et décalé","Tendre mais piquant","Auto-dérision (il/elle adore qu'on le charrie)","Parodie / exagération"]},
+    {type:"text", key:"interdits", label:"Les sujets à éviter (pour rester drôle, jamais blessant)", ph:"Ex : pas son ex, pas le boulot"},
+    {type:"free", key:"ton_libre", ph:"Préciser si tu veux…"}
+  ]},
+  { title:"La chute.", sub:"Jusqu'à 3 — un par couplet.", blocks:[
+    {type:"multi", key:"message", max:3, label:"Comment on termine ?", o:["Mais on t'adore quand même","Change surtout pas","T'es unique (heureusement)","On t'aime, gros boulet","Joyeux anniversaire quand même","Promis, on recommence l'année prochaine"]},
+    {type:"area", key:"message_libre", label:"Une vanne perso à caser", ph:"Ta meilleure punchline sur lui / elle…"}
+  ]},
+  { title:"L'univers musical.", sub:"Le son qui portera la vanne.", blocks:[
+    {type:"text", key:"artiste", label:"Un artiste ou un style qu'il/elle adore ?", hint:"On s'en inspire — la musique est 100% originale.", ph:"Ex : un artiste qu'il écoute en boucle, une ambiance fun"},
+    {type:"choice", key:"style", label:"Pas d'idée ? Choisis un style", o:["Rap","Pop","Variété française","Festif / Dansant","Rock","Reggae"]},
+    {type:"free", key:"musique_libre", ph:"Une 2ᵉ référence, ou une ambiance (festive, second degré…)"}
+  ]}
+];
+
+const data={}; let i=0; let intro=true; let final=false;
+const stage=document.getElementById('stage'),bar=document.getElementById('bar'),
+nextBtn=document.getElementById('next'),backBtn=document.getElementById('back');
+const TOTAL=SCREENS.length;
+
+function setProgress(){let p=intro?4:(final?100:Math.max(Math.round(i/TOTAL*100),6));bar.style.width=p+'%';}
+
+function choiceBlock(b){
+  const box=document.createElement('div');box.className='opts';
+  b.o.forEach(op=>{
+    const el=document.createElement('button');el.className='opt';el.type='button';el.innerHTML=`<span>${op}</span>`;
+    if(data[b.key]===op)el.classList.add('sel');
+    el.onclick=()=>{
+      if(data[b.key]===op){delete data[b.key];}
+      else{data[b.key]=op;}
+      if(b.controls){render(true);}
+      else{box.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));if(data[b.key]===op)el.classList.add('sel');}
+    };
+    box.appendChild(el);
+  });
+  return box;
+}
+function multiBlock(b){
+  if(!Array.isArray(data[b.key]))data[b.key]=[];
+  const box=document.createElement('div');box.className='chips';
+  function refresh(){
+    const full=b.max&&data[b.key].length>=b.max;
+    box.querySelectorAll('.chip').forEach((c,idx)=>{const op=b.o[idx];const on=data[b.key].includes(op);c.classList.toggle('locked',full&&!on);});
+  }
+  b.o.forEach(op=>{
+    const c=document.createElement('button');c.className='chip';c.type='button';c.textContent=op;
+    if(data[b.key].includes(op))c.classList.add('sel');
+    c.onclick=()=>{const a=data[b.key];const k=a.indexOf(op);
+      if(k>=0){a.splice(k,1);c.classList.remove('sel');}
+      else{if(b.max&&a.length>=b.max)return;a.push(op);c.classList.add('sel');}
+      refresh();};
+    box.appendChild(c);
+  });
+  refresh();
+  return box;
+}
+function textBlock(b){
+  const el=document.createElement(b.type==='area'?'textarea':'input');
+  el.className='field';if(b.type!=='area')el.type='text';el.placeholder=b.ph||'';
+  if(data[b.key])el.value=data[b.key];
+  el.oninput=()=>{data[b.key]=el.value.trim();};
+  return el;
+}
+
+function render(keepScroll){
+  stage.innerHTML='';
+  if(intro){renderIntro();backBtn.hidden=true;nextBtn.className='btn cta';nextBtn.textContent="C'est parti";nextBtn.onclick=()=>{intro=false;render();};setProgress();return;}
+  if(final){renderFinal();backBtn.hidden=false;nextBtn.className='btn cta';nextBtn.textContent='Créer ma chanson 🎵';nextBtn.onclick=submit;setProgress();return;}
+  const s=SCREENS[i];const step=document.createElement('div');step.className='step';
+  const eb=document.createElement('div');eb.className='eyebrow';eb.innerHTML=`<span class="dot"></span>${EYEBROW} · ${i+1}/${TOTAL}`;
+  const h=document.createElement('h1');h.textContent=s.title;step.appendChild(eb);step.appendChild(h);
+  if(s.sub){const sub=document.createElement('div');sub.className='screen-sub';sub.textContent=s.sub;step.appendChild(sub);}
+  s.blocks.forEach(b=>{
+    if(b.showIf && data[b.showIf.key]!==b.showIf.value) return;
+    const block=document.createElement('div');block.className='block';
+    if(b.type==='free'){
+      const lab=document.createElement('div');lab.className='addlabel';lab.textContent='Ajouter / préciser';
+      block.appendChild(lab);block.appendChild(textBlock({...b,type:'area'}));
+    }else{
+      const lab=document.createElement('label');lab.className='qlabel';lab.textContent=b.label;block.appendChild(lab);
+      if(b.hint){const hi=document.createElement('span');hi.className='qhint';hi.textContent=b.hint;block.appendChild(hi);}
+      if(b.type==='choice')block.appendChild(choiceBlock(b));
+      else if(b.type==='multi')block.appendChild(multiBlock(b));
+      else block.appendChild(textBlock(b));
+    }
+    step.appendChild(block);
+  });
+  stage.appendChild(step);
+  backBtn.hidden=false;
+  nextBtn.className='btn';nextBtn.textContent=(i===TOTAL-1)?'Voir le récap':'Continuer';nextBtn.onclick=next;
+  setProgress();if(!keepScroll)window.scrollTo({top:0,behavior:'smooth'});
+}
+function renderIntro(){
+  const step=document.createElement('div');step.className='step intro';
+  step.innerHTML=`
+    <div class="eyebrow"><span class="dot"></span>${EYEBROW}</div>
+    <h1>${INTRO.title}</h1>
+    <p>Quelques questions, deux minutes.</p>
+    <p>Un secret : <b>plus tes réponses sont précises</b> — une anecdote, une manie, une private joke — plus la chanson fera mouche.</p>
+    <p class="em">Une histoire chantée pour ne jamais s'effacer. ✨</p>`;
+  stage.appendChild(step);window.scrollTo({top:0,behavior:'smooth'});
+}
+function renderFinal(){
+  const step=document.createElement('div');step.className='step final';
+  step.innerHTML=`<div class="big">🎵</div>
+    <div class="eyebrow" style="justify-content:center"><span class="dot"></span>C'est noté</div>
+    <h1>Sa chanson est en route.</h1>
+    <div class="screen-sub" style="text-align:center">On a tout pour composer cette StoryBeat unique.</div>`;
+  const recap=document.createElement('div');recap.className='recap';const rows=[];
+  const map=[['prenom','La victime'],['sexe','C\'est'],['occasion','Occasion'],['role','De la part de'],['offrant','Offert par'],['lien_libre','Lien (+)'],['moment','L\'anecdote'],['manie','Sa manie'],['moment_libre','En +'],['perso','Son personnage'],['signature','Phrase culte'],['signature_libre','En +'],['ton','Type d\'humour'],['interdits','À éviter'],['ton_libre','Ton (+)'],['message','La chute'],['message_libre','Vanne perso'],['artiste','Artiste / style'],['style','Style'],['musique_libre','Musique (+)']];
+  map.forEach(([k,lab])=>{const v=data[k];if(v&&(!Array.isArray(v)||v.length))rows.push([lab,Array.isArray(v)?v.join(', '):v]);});
+  recap.innerHTML=rows.map(r=>`<div class="row"><span class="k">${r[0]}</span><span class="v">${r[1]}</span></div>`).join('')||'<div class="row"><span class="k">—</span><span class="v">Aucune réponse</span></div>';
+  step.appendChild(recap);
+  const d=document.createElement('div');d.className='delay';d.innerHTML='Livraison par mail en <b>moins de 24h</b>.';step.appendChild(d);
+  stage.appendChild(step);window.scrollTo({top:0,behavior:'smooth'});
+}
+function next(){if(i<TOTAL-1){i++;render();}else{final=true;render();}}
+function back(){if(final){final=false;i=TOTAL-1;render();return;}if(i>0){i--;render();}else{intro=true;render();}}
+function submit(){alert("👉 Ici on branchera le paiement (Systeme.io / Stripe).\nVoix, email & prénom de l'acheteur se rempliront sur la page de paiement.");}
+nextBtn.onclick=()=>{intro=false;render();};backBtn.onclick=back;
+render();
+</script>
+</body>
+</html>
