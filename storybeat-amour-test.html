@@ -118,7 +118,9 @@ const EYEBROW="❤️ Amour";
 const SCREENS=[
   { title:"Parle-nous de vous deux.", sub:"On plante le décor.", blocks:[
     {type:"text", key:"qui", label:"Son prénom + depuis quand", ph:"Ex : Sarah, ensemble depuis 7 ans"},
+    {type:"choice", key:"sexe", label:"C'est…", o:["Un homme","Une femme"]},
     {type:"choice", key:"etape", label:"Vous en êtes où ?", o:["Le tout début","Quelques années","Toute une vie","Une demande spéciale","On s'est retrouvés après une épreuve"]},
+    {type:"text", key:"offrant", label:"Ton prénom (celui qui offre)", ph:"Ex : Naïm"},
     {type:"free", key:"lien_libre", ph:"Ajouter un mot sur votre lien…"}
   ]},
   { title:"Le moment où tu t'es dit : c'est elle / c'est lui.", sub:"Le souvenir qui résume tout.", blocks:[
@@ -234,7 +236,7 @@ function renderFinal(){
     <h1>Ta chanson est en route.</h1>
     <div class="screen-sub" style="text-align:center">On a tout pour composer ta StoryBeat unique.</div>`;
   const recap=document.createElement('div');recap.className='recap';const rows=[];
-  const map=[['qui','Le couple'],['etape','Étape'],['lien_libre','Lien (+)'],['moment','Le moment'],['moment_type','Type de moment'],['moment_libre','Détail (+)'],['traits','Ce qui le/la définit'],['signature','Détail signature'],['detail_libre','En +'],['emotion','Émotion'],['emotion_libre','Émotion (+)'],['message','Messages'],['message_libre','En tes mots'],['artiste','Artiste / chanson'],['style','Style'],['musique_libre','Musique (+)']];
+  const map=[['qui','Le couple'],['sexe','Sexe'],['etape','Étape'],['offrant','Offert par'],['lien_libre','Lien (+)'],['moment','Le moment'],['moment_type','Type de moment'],['moment_libre','Détail (+)'],['traits','Ce qui le/la définit'],['signature','Détail signature'],['detail_libre','En +'],['emotion','Émotion'],['emotion_libre','Émotion (+)'],['message','Messages'],['message_libre','En tes mots'],['artiste','Artiste / chanson'],['style','Style'],['musique_libre','Musique (+)']];
   map.forEach(([k,lab])=>{const v=data[k];if(v&&(!Array.isArray(v)||v.length))rows.push([lab,Array.isArray(v)?v.join(', '):v]);});
   recap.innerHTML=rows.map(r=>`<div class="row"><span class="k">${r[0]}</span><span class="v">${r[1]}</span></div>`).join('')||'<div class="row"><span class="k">—</span><span class="v">Aucune réponse</span></div>';
   step.appendChild(recap);

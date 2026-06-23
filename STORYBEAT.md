@@ -80,7 +80,7 @@ Chaque catégorie a son fichier `storybeat-<cat>-test.html` = source de vérité
 ## 6. Reste à faire
 
 - [ ] **Assembler** le questionnaire complet dans Claude Code : écran d'entrée (message universel + choix des 7 catégories) + branchement vers la bonne catégorie + récap final commun. Réutiliser le moteur JS des fichiers test.
-- [ ] Répercuter les règles transverses (sexe « il/elle », rôle+prénom offrant) sur **Amour** et **Hommage** (validées avant ces règles).
+- [x] Répercuter les règles transverses (sexe « il/elle », rôle+prénom offrant) sur **Amour** et **Hommage** (validées avant ces règles).
 - [ ] **Page de vente** (titre, promesse, réassurance, bouton) angle Émotion/Humour/Clash + « moins de 24h ».
 - [ ] Intégrer dans **Systeme.io** (ou héberger + brancher paiement). Collecte voix/email/prénom acheteur au paiement.
 

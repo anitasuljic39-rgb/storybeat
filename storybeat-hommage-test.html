@@ -117,8 +117,11 @@ const EYEBROW="🕊️ Hommage";
 const INTRO={title:"Rendre hommage, c'est offrir une trace qui reste."};
 const SCREENS=[
   { title:"À qui rend-on hommage ?", sub:"On plante le décor.", blocks:[
-    {type:"text", key:"qui", label:"Pour qui cet hommage ? (prénom + ton lien)", ph:"Ex : ma grand-mère Henriette"},
+    {type:"text", key:"qui", label:"Le prénom de la personne", ph:"Ex : Henriette"},
+    {type:"choice", key:"sexe", label:"C'est…", o:["Un homme","Une femme","Un garçon","Une fille"]},
+    {type:"choice", key:"lien", label:"C'était pour toi…", o:["Un parent","Un grand-parent","Un·e ami·e","Ton/ta conjoint·e","Un frère / une sœur","Une figure qui t'a marqué"]},
     {type:"choice", key:"vivant", label:"Tu lui rends hommage…", o:["De son vivant","En sa mémoire"]},
+    {type:"text", key:"offrant", label:"Ton prénom", ph:"Ex : Naïm"},
     {type:"free", key:"lien_libre", ph:"Ajouter un mot sur votre lien…"}
   ]},
   { title:"Le souvenir qui ne doit jamais s'effacer.", sub:"Le cœur de la chanson.", blocks:[
@@ -234,7 +237,7 @@ function renderFinal(){
     <h1>Ta chanson est en route.</h1>
     <div class="screen-sub" style="text-align:center">On a tout pour composer ta StoryBeat unique.</div>`;
   const recap=document.createElement('div');recap.className='recap';const rows=[];
-  const map=[['qui','Hommage à'],['vivant','Contexte'],['lien_libre','Lien (+)'],['moment','Le souvenir'],['moment_type','Type de souvenir'],['moment_libre','Détail (+)'],['traits','Ce qui la définissait'],['signature','Détail signature'],['detail_libre','En +'],['emotion','Émotion'],['emotion_libre','Émotion (+)'],['message','Messages'],['message_libre','En tes mots'],['artiste','Artiste / chanson'],['style','Style'],['musique_libre','Musique (+)']];
+  const map=[['qui','Hommage à'],['sexe','Sexe'],['lien','Ton lien'],['vivant','Contexte'],['offrant','Offert par'],['lien_libre','Lien (+)'],['moment','Le souvenir'],['moment_type','Type de souvenir'],['moment_libre','Détail (+)'],['traits','Ce qui la définissait'],['signature','Détail signature'],['detail_libre','En +'],['emotion','Émotion'],['emotion_libre','Émotion (+)'],['message','Messages'],['message_libre','En tes mots'],['artiste','Artiste / chanson'],['style','Style'],['musique_libre','Musique (+)']];
   map.forEach(([k,lab])=>{const v=data[k];if(v&&(!Array.isArray(v)||v.length))rows.push([lab,Array.isArray(v)?v.join(', '):v]);});
   recap.innerHTML=rows.map(r=>`<div class="row"><span class="k">${r[0]}</span><span class="v">${r[1]}</span></div>`).join('')||'<div class="row"><span class="k">—</span><span class="v">Aucune réponse</span></div>';
   step.appendChild(recap);
