@@ -1,7 +1,7 @@
 # StoryBeat — Mémo projet
 
 > Document de reprise. À donner à Claude Code (ou à toute nouvelle conversation) pour repartir avec tout le contexte.
-> Dernière mise à jour : juin 2026.
+> Dernière mise à jour : juin 2026. **Les 7 catégories du questionnaire sont validées. Prochaine étape : assemblage.**
 
 ---
 
@@ -29,7 +29,7 @@ Le client commande, remplit un questionnaire émotionnel, et reçoit sa chanson.
 - **Champ libre « Ajouter / préciser » sur CHAQUE écran.**
 - **Tout est facultatif. Tutoiement.**
 - **Choix multiple** quand les réponses se cumulent ; **choix unique** quand une seule a du sens.
-- **Champs conditionnels** (`showIf`) possibles (ex. fratrie). **Re-render** d'écran pour les choix qui pilotent un champ (`controls`).
+- **Champs conditionnels** (`showIf`). **Re-render** d'écran pour les choix pilotes (`controls`). Punchlines longues = chips pleine largeur (`long`).
 - La page **scrolle** : aucune limite de caractères.
 
 ### Écran d'entrée du tunnel (UNE seule fois) — message universel + choix des 7 catégories
@@ -52,9 +52,9 @@ Lien → moment → détail signature → émotion (**multi**) → messages (**m
 
 Charte néon du logo : fond `#0b0a10`, rose `#ff3aa8`, violet `#9b4dff`, cyan `#1fd6ff`, dégradé rose→violet→cyan, onde sonore. Pastilles sélectionnées = remplies en dégradé + ✓. Mobile-first, scroll vertical.
 ⚠️ NE PAS utiliser la charte dorée de Destiny Impact.
-Moteur JS commun (voir fichiers test) : intro / choice (unique) / multi (`max` optionnel, `long` pour punchlines pleine largeur) / text / area / free (champ libre) / showIf (conditionnel) / controls (re-render) / récap final.
+Moteur JS commun (voir fichiers test) : intro / choice (unique) / multi (`max`, `long`) / text / area / free / showIf / controls / récap final.
 
-## 5. Avancement des catégories
+## 5. Avancement des catégories — ✅ LES 7 SONT VALIDÉES
 
 | Catégorie | Statut | Écrans |
 |---|---|---|
@@ -64,22 +64,23 @@ Moteur JS commun (voir fichiers test) : intro / choice (unique) / multi (`max` o
 | Anniversaire | ✅ Validé | 7 |
 | Humour | ✅ Validé | 6 |
 | Clash | ✅ Validé | 7 |
-| **Mariage** | ⏳ **En cours** — plan proposé ci-dessous, à valider | 7 (prévu) |
+| Mariage | ✅ Validé | 7 |
 
-### Plan MARIAGE proposé (à valider avec Anita avant code)
-1. **Pour quel mariage ?** : prénoms des mariés · « Tu chantes… » (à ma moitié / aux mariés / discours de témoin / surprise des invités) · ton rôle · ton prénom · libre
-2. **Leur histoire** : comment ça a commencé (texte) · « Ils en sont où ? » (jeunes mariés / années ensemble / longue date officialisée / retrouvés) · libre
-3. **Ce qui les définit** : multi (complices, inséparables, drôles, solides, aventuriers, tendres, pétillants, yin-yang, fusionnels, piliers de la bande) · leur private joke/surnom · libre
-4. **L'émotion** (multi) : émouvante, festive, tendre, drôle, romantique, gratitude · libre
-5. **Les messages** (multi max 3) : faits l'un pour l'autre, vie de bonheur, merci de nous réunir, amour éternel, fiers de vous, mille aventures · « dis-le avec tes mots »
-6. **Le grand jour** : détail du mariage (texte) · « la chanson c'est pour… » (cérémonie / première danse / soirée / à offrir) · libre
-7. **Univers musical** : artiste/chanson du couple · styles (pop romantique, variété, soul/R&B, ballade, festif, classique) · libre
+Chaque catégorie a son fichier `storybeat-<cat>-test.html` = source de vérité du contenu ET du code. Pour assembler, repartir de ces fichiers (ne pas réinventer les libellés).
+
+### Détail MARIAGE (7 écrans)
+1. Pour quel mariage : prénoms des mariés · « Tu chantes… » (à ma moitié / aux mariés / discours témoin / surprise) · ton rôle · ton prénom · libre
+2. Leur histoire : comment ça a commencé (texte) · « Ils en sont où ? » (jeunes mariés / années / longue date officialisée / retrouvés) · libre
+3. Ce qui les définit : multi (complices, inséparables, drôles, solides, aventuriers, tendres, pétillants, yin-yang, fusionnels, piliers) · leur private joke/surnom · libre
+4. Émotion (multi) : émouvante, festive, tendre, drôle, romantique, gratitude · libre
+5. Messages (multi max 3) : faits l'un pour l'autre, vie de bonheur, merci de nous réunir, amour éternel, fiers de vous, mille aventures · « dis-le avec tes mots »
+6. Le grand jour : détail du mariage (texte) · « la chanson c'est pour… » (cérémonie / première danse / soirée / à offrir) · libre
+7. Univers musical : artiste/chanson du couple · styles (pop romantique, variété, soul/R&B, ballade, festif, classique) · libre
 
 ## 6. Reste à faire
 
-- [ ] Valider **Mariage** (dernière catégorie).
+- [ ] **Assembler** le questionnaire complet dans Claude Code : écran d'entrée (message universel + choix des 7 catégories) + branchement vers la bonne catégorie + récap final commun. Réutiliser le moteur JS des fichiers test.
 - [ ] Répercuter les règles transverses (sexe « il/elle », rôle+prénom offrant) sur **Amour** et **Hommage** (validées avant ces règles).
-- [ ] **Assembler** le questionnaire complet (écran d'entrée 7 catégories + branchement) dans Claude Code.
 - [ ] **Page de vente** (titre, promesse, réassurance, bouton) angle Émotion/Humour/Clash + « moins de 24h ».
 - [ ] Intégrer dans **Systeme.io** (ou héberger + brancher paiement). Collecte voix/email/prénom acheteur au paiement.
 
@@ -91,4 +92,5 @@ Moteur JS commun (voir fichiers test) : intro / choice (unique) / multi (`max` o
 - `storybeat-naissance-test.html` — Naissance (showIf conditionnel, sexe, rôle+prénom).
 - `storybeat-anniversaire-test.html` — Anniversaire (écran âge/cap).
 - `storybeat-humour-test.html` — Humour (garde-fou, phrasing Suno).
-- `storybeat-clash-test.html` — Clash (niveau de chauffe + garde-fou discret, punchlines pleine largeur `long`).
+- `storybeat-clash-test.html` — Clash (niveau de chauffe + garde-fou discret, punchlines `long`).
+- `storybeat-mariage-test.html` — Mariage (« tu chantes… », le grand jour).
