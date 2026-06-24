@@ -108,6 +108,21 @@
   .formerr{color:#ff6b6b;font-size:14px;font-weight:600;text-align:left;margin-top:14px}
   .formerr:empty{display:none}
 
+  /* ===== Cartes de formule (écran de fin, après envoi réussi) ===== */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px;text-align:left}
+  .plan{position:relative;display:flex;flex-direction:column;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:22px 18px}
+  .plan.featured{border-color:var(--pink);box-shadow:0 8px 30px rgba(255,58,168,.16)}
+  .plan-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);white-space:nowrap;background:var(--grad);color:#fff;font-family:var(--body);font-weight:700;font-size:11.5px;letter-spacing:.3px;padding:5px 12px;border-radius:99px}
+  .plan-name{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+  .plan-price{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;margin:8px 0 16px;background:var(--grad3);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .plan ul{list-style:none;margin:0 0 18px;padding:0;display:flex;flex-direction:column;gap:9px}
+  .plan li{position:relative;padding-left:23px;font-size:14px;line-height:1.4;color:var(--white)}
+  .plan li::before{content:"✓";position:absolute;left:0;top:0;color:var(--cyan);font-weight:700}
+  .btn-pay{margin-top:auto;display:block;text-align:center;text-decoration:none;background:var(--pink);color:#fff;font-family:var(--display);font-weight:700;font-size:14.5px;padding:14px 14px;border-radius:14px;transition:transform .12s,filter .15s}
+  .btn-pay:hover{filter:brightness(1.08)}
+  .btn-pay:active{transform:scale(.98)}
+  @media (max-width:600px){.plans{grid-template-columns:1fr}}
+
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser/dist/email.min.js"></script>
@@ -582,7 +597,43 @@ function orderDone(){
   step.innerHTML=`<div class="big">🎉</div>
     <div class="eyebrow" style="justify-content:center"><span class="dot"></span>C'est envoyé</div>
     <h1>Merci ! Ta commande est bien enregistrée 🎵</h1>
-    <div class="screen-sub" style="text-align:center">On a bien reçu toutes tes réponses. Livraison par mail en <b>moins de 24h</b>.</div>`;
+    <div class="screen-sub" style="text-align:center">On a bien reçu toutes tes réponses. Livraison par mail en <b>moins de 24h</b>.</div>
+    <div class="screen-sub" style="text-align:center;margin-top:14px"><b>Dernière étape : choisis ta formule pour lancer ta chanson.</b></div>
+    <div class="plans">
+      <div class="plan">
+        <div class="plan-name">Essentiel</div>
+        <div class="plan-price">29€</div>
+        <ul>
+          <li>2 couplets + refrain</li>
+          <li>2 versions au choix</li>
+          <li>Livré en moins de 24h (MP3)</li>
+        </ul>
+        <a class="btn-pay" href="https://www.storybeat.fr/essentiel">Choisir l'Essentiel</a>
+      </div>
+      <div class="plan featured">
+        <div class="plan-badge">Le plus choisi</div>
+        <div class="plan-name">Populaire</div>
+        <div class="plan-price">49€</div>
+        <ul>
+          <li>3 couplets + refrain</li>
+          <li>La voix au choix (homme ou femme)</li>
+          <li>2 versions au choix</li>
+          <li>Livré en moins de 24h (MP3)</li>
+        </ul>
+        <a class="btn-pay" href="https://www.storybeat.fr/populaire">Choisir le Populaire</a>
+      </div>
+      <div class="plan">
+        <div class="plan-name">Premium</div>
+        <div class="plan-price">99€</div>
+        <ul>
+          <li>3 couplets + refrain</li>
+          <li>La voix au choix</li>
+          <li>Une vidéo avec vos photos + paroles en sous-titres</li>
+          <li>Livré en moins de 24h (MP4 vidéo)</li>
+        </ul>
+        <a class="btn-pay" href="https://www.storybeat.fr/premium">Choisir le Premium</a>
+      </div>
+    </div>`;
   stage.appendChild(step);
   nav.style.display='none';
   setProgress();
