@@ -610,12 +610,9 @@ function submit(){
   emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ID,params)
     .then(()=>{orderDone();})
     .catch(err=>{
-      // --- DIAGNOSTIC TEMPORAIRE : affiche l'erreur exacte renvoyée par EmailJS ---
-      console.error('EmailJS error (objet complet) →', err);
-      const status=(err&&err.status!==undefined)?err.status:'?';
-      const txt=(err&&(err.text||err.message))?(err.text||err.message):JSON.stringify(err);
+      console.error('EmailJS error',err);
       nextBtn.disabled=false;nextBtn.textContent=oldLabel;
-      showFormError("DEBUG EmailJS — status "+status+" : "+txt);
+      showFormError("L'envoi a échoué. Vérifie ta connexion et réessaie — tes réponses sont conservées.");
     });
 }
 backBtn.onclick=back;
