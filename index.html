@@ -97,8 +97,20 @@
   .recap .row:last-child{border-bottom:none}
   .recap .k{color:var(--muted);flex:none;max-width:42%;min-width:0;overflow-wrap:anywhere;word-break:break-word}.recap .v{flex:1;min-width:0;text-align:right;font-weight:600;overflow-wrap:anywhere;word-break:break-word}
   .delay{margin-top:14px;color:var(--muted);font-size:14px}.delay b{color:var(--white)}
+
+  .coords{text-align:left;margin-top:8px}
+  .coords .qlabel{margin-bottom:8px}
+  .req{color:var(--pink)}
+  .consent{display:flex;align-items:flex-start;gap:10px;margin-top:18px;cursor:pointer;font-size:14px;color:var(--muted);line-height:1.45;text-align:left}
+  .consent input{appearance:none;flex:none;width:22px;height:22px;border:1.5px solid var(--line);border-radius:7px;background:var(--card);cursor:pointer;margin-top:1px;position:relative;transition:border-color .18s,background .18s}
+  .consent input:checked{background:var(--grad);border-color:transparent}
+  .consent input:checked::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:700}
+  .formerr{color:#ff6b6b;font-size:14px;font-weight:600;text-align:left;margin-top:14px}
+  .formerr:empty{display:none}
+
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser/dist/email.min.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -504,6 +516,25 @@ function renderFinal(){
   cat.recap.forEach(([k,lab])=>{const v=data[k];if(v&&(!Array.isArray(v)||v.length))rows.push([lab,Array.isArray(v)?v.join(', '):v]);});
   recap.innerHTML=rows.map(r=>`<div class="row"><span class="k">${r[0]}</span><span class="v">${r[1]}</span></div>`).join('')||'<div class="row"><span class="k">—</span><span class="v">Aucune réponse</span></div>';
   step.appendChild(recap);
+
+  /* ===== Écran final : coordonnées (email obligatoire) ===== */
+  const form=document.createElement('div');form.className='coords';
+  form.innerHTML=`
+    <div class="block"><label class="qlabel" for="f_email">Ton email <span class="req">*</span></label>
+      <input class="field" id="f_email" type="email" inputmode="email" autocomplete="email" placeholder="ton@email.com"></div>
+    <div class="block"><label class="qlabel" for="f_email2">Confirme ton email <span class="req">*</span></label>
+      <input class="field" id="f_email2" type="email" inputmode="email" autocomplete="email" placeholder="ton@email.com"></div>
+    <label class="consent"><input type="checkbox" id="f_consent"><span>J'accepte de recevoir des nouvelles et offres de StoryBeat par email.</span></label>
+    <div class="formerr" id="formerr"></div>`;
+  step.appendChild(form);
+  const em=form.querySelector('#f_email'),em2=form.querySelector('#f_email2'),cs=form.querySelector('#f_consent');
+  if(data.email)em.value=data.email;
+  if(data.email_confirm)em2.value=data.email_confirm;
+  if(data.consent_relance)cs.checked=true;
+  em.oninput=()=>{data.email=em.value.trim();};
+  em2.oninput=()=>{data.email_confirm=em2.value.trim();};
+  cs.onchange=()=>{data.consent_relance=cs.checked;};
+
   const d=document.createElement('div');d.className='delay';d.innerHTML='Livraison par mail en <b>moins de 24h</b>.';step.appendChild(d);
   stage.appendChild(step);window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -513,7 +544,77 @@ function back(){
   if(i>0){i--;render();return;}
   cat=null;clearData();i=0;final=false;render();
 }
-function submit(){alert("👉 Ici on branchera le paiement (Systeme.io / Stripe).\nVoix, email & prénom de l'acheteur se rempliront sur la page de paiement.");}
+/* ===== Envoi de la commande via EmailJS ===== */
+const EMAILJS_PUBLIC_KEY='u6MuSGT1tR3q8I1pb';
+const EMAILJS_SERVICE_ID='service_ehijilk';
+const EMAILJS_TEMPLATE_ID='0zztfni';
+if(window.emailjs)emailjs.init({publicKey:EMAILJS_PUBLIC_KEY});
+
+function showFormError(msg){const e=document.getElementById('formerr');if(e)e.textContent=msg||'';}
+function isValidEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}
+function fmtVal(v){return Array.isArray(v)?v.join(', '):v;}
+
+function buildMessage(){
+  const lines=[];
+  lines.push('Catégorie : '+(cat?cat.eyebrow:'—'));
+  const shown=new Set();
+  (cat?cat.recap:[]).forEach(([k,lab])=>{
+    shown.add(k);
+    const v=data[k];
+    if(v&&(!Array.isArray(v)||v.length))lines.push(lab+' : '+fmtVal(v));
+  });
+  // Filet de sécurité : toute réponse remplie non listée dans le récap
+  const skip=new Set(['email','email_confirm','consent_relance']);
+  for(const k in data){
+    if(shown.has(k)||skip.has(k))continue;
+    const v=data[k];
+    if(v&&(!Array.isArray(v)||v.length))lines.push(k+' : '+fmtVal(v));
+  }
+  lines.push('');
+  lines.push('Email : '+(data.email||''));
+  lines.push('Consentement nouvelles/offres : '+(data.consent_relance?'Oui':'Non'));
+  return lines.join('\n');
+}
+
+function orderDone(){
+  stage.innerHTML='';
+  const step=document.createElement('div');step.className='step final';
+  step.innerHTML=`<div class="big">🎉</div>
+    <div class="eyebrow" style="justify-content:center"><span class="dot"></span>C'est envoyé</div>
+    <h1>Merci ! Ta commande est bien enregistrée 🎵</h1>
+    <div class="screen-sub" style="text-align:center">On a bien reçu toutes tes réponses. Livraison par mail en <b>moins de 24h</b>.</div>`;
+  stage.appendChild(step);
+  nav.style.display='none';
+  setProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function submit(){
+  const email=(data.email||'').trim();
+  const confirm=(data.email_confirm||'').trim();
+  if(!email){showFormError('Merci de renseigner ton email.');const f=document.getElementById('f_email');if(f)f.focus();return;}
+  if(!isValidEmail(email)){showFormError("Cet email ne semble pas valide (il faut un @ et un domaine valide).");const f=document.getElementById('f_email');if(f)f.focus();return;}
+  if(email!==confirm){showFormError('Les deux emails ne correspondent pas');const f=document.getElementById('f_email2');if(f)f.focus();return;}
+  showFormError('');
+
+  if(!window.emailjs){showFormError("Service d'envoi indisponible pour le moment. Réessaie dans un instant.");return;}
+
+  const params={
+    name:(data.offrant||data.offrant_prenom||'Client'),
+    email:email,
+    message:buildMessage()
+  };
+
+  const oldLabel=nextBtn.textContent;
+  nextBtn.disabled=true;nextBtn.textContent='Envoi en cours...';
+  emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ID,params)
+    .then(()=>{orderDone();})
+    .catch(err=>{
+      console.error('EmailJS error',err);
+      nextBtn.disabled=false;nextBtn.textContent=oldLabel;
+      showFormError("L'envoi a échoué. Vérifie ta connexion et réessaie — tes réponses sont conservées.");
+    });
+}
 backBtn.onclick=back;
 render();
 </script>
