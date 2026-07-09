@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StoryBeat — Ta chanson</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap');
+:root{
+  --bg:#0b0a10;--bg2:#100e16;--card:#1c1926;--card-hi:#26212f;
+  --pink:#ff3aa8;--violet:#9b4dff;--cyan:#1fd6ff;--white:#fff;
+  --muted:rgba(255,255,255,.62);--line:rgba(255,255,255,.12);
+  --grad3:linear-gradient(90deg,#ff3aa8 0%,#9b4dff 50%,#1fd6ff 100%);
+  --display:'Sora',sans-serif;--body:'Manrope',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--white);font-family:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;
+  background:radial-gradient(60% 40% at 50% 0%,rgba(155,77,255,.22),transparent 70%),radial-gradient(50% 30% at 80% 15%,rgba(31,214,255,.12),transparent 70%),var(--bg);
+  padding:32px 20px 60px;}
+.wrap{max-width:520px;margin:0 auto}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:34px}
+.logo{font-family:var(--display);font-weight:800;font-style:italic;font-size:20px;letter-spacing:.5px}
+.logo .b{background:var(--grad3);-webkit-background-clip:text;background-clip:text;color:transparent}
+.player-card{background:var(--card);background:linear-gradient(var(--card),var(--card)) padding-box,var(--grad3) border-box;border:1.5px solid transparent;border-radius:26px;padding:34px 28px;text-align:center;box-shadow:0 30px 80px -30px rgba(155,77,255,.55);}
+.cover{width:132px;height:132px;border-radius:26px;margin:0 auto 22px;background:var(--grad3);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:52px;color:#fff;box-shadow:0 16px 40px -12px rgba(255,58,168,.5);position:relative;background-size:cover;background-position:center}
+.cover .note{position:absolute;bottom:-8px;right:-8px;background:var(--bg2);border:1px solid var(--line);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px}
+.eyebrow{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.title{font-family:var(--display);font-weight:800;font-size:26px;line-height:1.15;margin-bottom:6px}
+.for{color:var(--muted);font-size:15px;margin-bottom:24px}
+.wave{display:flex;align-items:center;justify-content:center;gap:3px;height:44px;margin:6px 0 18px}
+.wave span{width:3px;border-radius:3px;background:linear-gradient(180deg,var(--pink),var(--violet));opacity:.5}
+.wave.playing span{animation:bounce 1s ease-in-out infinite;opacity:1}
+@keyframes bounce{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+.bar{height:5px;background:rgba(255,255,255,.14);border-radius:5px;overflow:hidden;margin-bottom:8px;cursor:pointer}
+.bar .fill{height:100%;width:0%;background:var(--grad3);border-radius:5px}
+.times{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:22px}
+.play{width:74px;height:74px;border-radius:50%;border:none;cursor:pointer;margin:0 auto;background:var(--grad3);color:#fff;font-size:28px;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 34px -8px rgba(255,58,168,.6);transition:transform .15s}
+.play:hover{transform:scale(1.06)}
+video{width:100%;border-radius:18px;margin-top:8px;background:#000}
+.lyrics{margin-top:30px;text-align:left}
+.lyrics h2{font-family:var(--display);font-weight:700;font-size:16px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px;text-align:center}
+.lyrics .part{margin-bottom:18px}
+.lyrics .lab{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--pink);font-weight:700;margin-bottom:6px}
+.lyrics p{color:rgba(255,255,255,.9);font-size:16px;line-height:1.7}
+.share{margin-top:32px;text-align:center}
+.share .lab2{font-size:13px;color:var(--muted);margin-bottom:14px}
+.share-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.sbtn{border:1px solid var(--line);background:var(--card-hi);color:var(--white);border-radius:14px;padding:13px 20px;font-family:var(--body);font-weight:600;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:border-color .2s,transform .1s}
+.sbtn:hover{border-color:var(--pink);transform:translateY(-1px)}
+.sbtn.wa{background:#25D366;border-color:#25D366;color:#0b0a10}
+#qrbox{display:none;margin:20px auto 0;background:#fff;padding:16px;border-radius:16px;width:fit-content}
+.foot{text-align:center;margin-top:40px;padding-top:26px;border-top:1px solid var(--line)}
+.foot p{color:var(--muted);font-size:14px;margin-bottom:14px}
+.cta{display:inline-block;background:var(--grad3);color:#fff;text-decoration:none;font-family:var(--display);font-weight:700;font-size:15px;padding:13px 26px;border-radius:14px;box-shadow:0 12px 30px -10px rgba(155,77,255,.6)}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:var(--card-hi);border:1px solid var(--line);color:#fff;padding:12px 20px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:.3s}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.state{text-align:center;padding:60px 20px;color:var(--muted)}
+.state h1{font-family:var(--display);color:var(--white);font-size:22px;margin-bottom:10px}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <div class="state"><h1>Chargement…</h1><p>Un instant, on prépare ta chanson 🎵</p></div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const app=document.getElementById('app');
+const params=new URLSearchParams(location.search);
+const id=params.get('id');
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1900);}
+function fmt(s){if(!s||isNaN(s))return '0:00';const m=Math.floor(s/60);const ss=String(Math.floor(s%60)).padStart(2,'0');return m+':'+ss;}
+function esc(t){return (t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function showError(msg){
+  app.innerHTML='<div class="state"><h1>Oups…</h1><p>'+msg+'</p><p style="margin-top:18px"><a class="cta" href="https://www.storybeat.fr">Découvrir StoryBeat</a></p></div>';
+}
+if(!id){ showError("Aucune chanson n'est indiquée dans le lien."); }
+else{
+  fetch('../chansons/'+encodeURIComponent(id)+'.json')
+    .then(r=>{ if(!r.ok) throw new Error('not found'); return r.json(); })
+    .then(render)
+    .catch(()=>showError("On ne trouve pas cette chanson. Vérifie le lien."));
+}
+function render(d){
+  const isVideo=(d.type==='video');
+  const coverIsImg=(d.cover||'').startsWith('http');
+  const coverStyle=coverIsImg?`style="background-image:url('${d.cover}')"`:'';
+  const coverInner=coverIsImg?'':esc(d.cover||d.prenom?.[0]||'♪');
+  let media;
+  if(isVideo){
+    media=`<video src="${d.media}" controls playsinline></video>`;
+  }else{
+    media=`
+      <div class="wave" id="wave">${'<span></span>'.repeat(20)}</div>
+      <div class="bar" id="bar"><div class="fill" id="fill"></div></div>
+      <div class="times"><span id="cur">0:00</span><span id="dur">0:00</span></div>
+      <button class="play" id="play" aria-label="Lecture">▶</button>
+      <audio id="audio" src="${d.media}" preload="metadata"></audio>`;
+  }
+  const lyrics=(d.paroles||[]).map(p=>`
+    <div class="part"><div class="lab">${esc(p.label)}</div>
+    <p>${esc(p.texte).replace(/\n/g,'<br>')}</p></div>`).join('');
+  app.innerHTML=`
+    <div class="top">
+      <div class="logo">STORY<span class="b">BEAT</span></div>
+    </div>
+    <div class="player-card">
+      <div class="cover" ${coverStyle}>${coverInner}<div class="note">🎵</div></div>
+      <div class="eyebrow">Une chanson rien que pour toi</div>
+      <div class="title">${esc(d.titre)}</div>
+      <div class="for">${esc(d.pour||'')}</div>
+      ${media}
+    </div>
+    ${lyrics?`<div class="lyrics"><h2>Les paroles</h2>${lyrics}</div>`:''}
+    <div class="share">
+      <div class="lab2">Partage cette chanson</div>
+      <div class="share-row">
+        <button class="sbtn wa" onclick="shareWa()">💬 WhatsApp</button>
+        <button class="sbtn" onclick="copyLink()">🔗 Copier le lien</button>
+        <button class="sbtn" onclick="toggleQR()">▦ QR code</button>
+      </div>
+      <div id="qrbox"></div>
+    </div>
+    <div class="foot">
+      <p>Cette chanson a été créée sur-mesure avec StoryBeat.</p>
+      <a class="cta" href="https://www.storybeat.fr">🎵 Crée la tienne</a>
+    </div>`;
+  if(!isVideo) setupAudio();
+}
+function setupAudio(){
+  const audio=document.getElementById('audio');
+  const play=document.getElementById('play');
+  const wave=document.getElementById('wave');
+  const fill=document.getElementById('fill');
+  const bar=document.getElementById('bar');
+  const cur=document.getElementById('cur');
+  const dur=document.getElementById('dur');
+  document.querySelectorAll('#wave span').forEach((s,i)=>{s.style.animationDelay=(i*0.06)+'s';s.style.height=(30+((i*37)%70))+'%';});
+  audio.addEventListener('loadedmetadata',()=>{dur.textContent=fmt(audio.duration);});
+  audio.addEventListener('timeupdate',()=>{fill.style.width=(audio.currentTime/audio.duration*100||0)+'%';cur.textContent=fmt(audio.currentTime);});
+  audio.addEventListener('ended',()=>{play.textContent='▶';wave.classList.remove('playing');});
+  play.onclick=()=>{ if(audio.paused){audio.play();play.textContent='❚❚';wave.classList.add('playing');} else {audio.pause();play.textContent='▶';wave.classList.remove('playing');} };
+  bar.onclick=(e)=>{const rect=bar.getBoundingClientRect();audio.currentTime=(e.clientX-rect.left)/rect.width*audio.duration;};
+}
+function copyLink(){const u=location.href;if(navigator.clipboard){navigator.clipboard.writeText(u).then(()=>toast('Lien copié ! ✨')).catch(()=>toast(u));}else toast(u);}
+function shareWa(){const u=encodeURIComponent(location.href);window.open('https://wa.me/?text='+u,'_blank');}
+function toggleQR(){
+  const box=document.getElementById('qrbox');
+  if(box.style.display==='block'){box.style.display='none';return;}
+  if(!box.hasChildNodes()){ new QRCode(box,{text:location.href,width:180,height:180}); }
+  box.style.display='block';
+}
+</script>
+</body>
+</html>

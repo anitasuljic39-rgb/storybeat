@@ -1,0 +1,13 @@
+{
+  "prenom": "Nora",
+  "titre": "Nora, ma sœur de cœur",
+  "pour": "Pour Nora, avec tout mon cœur ❤️",
+  "type": "audio",
+  "media": "https://storybeat.b-cdn.net/nora.mp3",
+  "cover": "N",
+  "paroles": [
+    { "label": "Couplet 1", "texte": "(Colle ici les vraies paroles du couplet 1.)\nLigne deux du couplet." },
+    { "label": "Refrain", "texte": "(Colle ici le refrain.)\nDeuxième ligne du refrain." },
+    { "label": "Couplet 2", "texte": "(Colle ici le couplet 2.)" }
+  ]
+}
