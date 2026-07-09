@@ -108,6 +108,17 @@
   .sb .guarantee h2{font-size:clamp(24px,4vw,34px);margin-bottom:14px}
   .sb .guarantee p{color:var(--muted);font-size:17px;max-width:520px;margin:0 auto}
 
+  .sb .proof-stats{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;margin:30px 0 40px}
+  .sb .stat{flex:1 1 180px;max-width:240px;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 18px}
+  .sb .stat .num{font-family:var(--display);font-weight:800;font-size:clamp(32px,5vw,44px);line-height:1;background:var(--grad3);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sb .stat .lab{color:var(--muted);font-size:14px;margin-top:8px;font-weight:600}
+  .sb .tmoins{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:900px;margin:0 auto}
+  .sb .tmoi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px 22px;display:flex;flex-direction:column;gap:10px}
+  .sb .tmoi .stars{color:#ffb43a;font-size:15px;letter-spacing:2px}
+  .sb .tmoi p{color:rgba(255,255,255,.9);font-size:15px;line-height:1.55;font-style:italic;margin:0}
+  .sb .tmoi .who{font-family:var(--display);font-weight:700;font-size:14px;color:var(--white);margin-top:auto}
+  @media(max-width:640px){.sb .tmoins{grid-template-columns:1fr}}
+
   .sb .faq{background:var(--bg2);border-top:1px solid var(--line)}
   .sb details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:0 20px;margin-bottom:12px;overflow:hidden}
   .sb summary{list-style:none;cursor:pointer;padding:18px 0;font-weight:700;font-size:16px;display:flex;justify-content:space-between;align-items:center;gap:14px}
@@ -152,8 +163,8 @@
   <!-- REASSURANCE -->
   <div class="reassure"><div class="wrap"><div class="row">
     <div class="item"><span class="ic">⏱️</span> Livrée en moins de 24h</div>
-    <div class="item"><span class="ic">👂</span> Ton extrait offert</div>
-    <div class="item"><span class="ic">✅</span> Tu ne paies que si tu adores</div>
+    <div class="item"><span class="ic">👂</span> Un extrait à valider</div>
+    <div class="item"><span class="ic">✅</span> Satisfaite ou remboursée</div>
   </div></div></div>
 
   <!-- PROMESSE -->
@@ -217,29 +228,62 @@
     <div class="tiers">
       <div class="tier">
         <div class="name">Essentielle</div><div class="price"><span class="old">49€</span> 29,99€</div>
-        <ul><li>2 couplets + refrain</li><li>2 versions au choix</li><li>Extrait gratuit avant d'acheter</li><li>Livré en moins de 24h en fichier MP3</li></ul>
+        <ul><li>2 couplets + refrain</li><li>2 versions au choix</li><li>Un extrait à valider avant la version finale</li><li>Livré en moins de 24h en fichier MP3</li></ul>
         <a href="https://anitasuljic39-rgb.github.io/storybeat/" class="btn">Choisir</a>
       </div>
       <div class="tier feat">
         <div class="badge">La plus choisie</div>
         <div class="name">Populaire</div><div class="price"><span class="old">79€</span> 49€</div>
-        <ul><li>3 couplets + refrain</li><li>La voix au choix (homme ou femme)</li><li>2 versions au choix</li><li>Extrait gratuit avant d'acheter</li><li>Livré en moins de 24h en fichier MP3</li></ul>
+        <ul><li>3 couplets + refrain</li><li>La voix au choix (homme ou femme)</li><li>2 versions au choix</li><li>Un extrait à valider avant la version finale</li><li>Livré en moins de 24h en fichier MP3</li></ul>
         <a href="https://anitasuljic39-rgb.github.io/storybeat/" class="btn">Choisir</a>
       </div>
       <div class="tier">
         <div class="name">Premium</div><div class="price"><span class="old">149€</span> 99€</div>
-        <ul><li>3 couplets + refrain</li><li>La voix au choix (homme ou femme)</li><li class="star">Une vidéo avec vos photos + les paroles en sous-titres</li><li>Extrait gratuit avant d'acheter</li><li>Livré en moins de 24h en fichier MP4 vidéo</li></ul>
+        <ul><li>3 couplets + refrain</li><li>La voix au choix (homme ou femme)</li><li class="star">Une vidéo avec vos photos + les paroles en sous-titres</li><li>Un extrait à valider avant la version finale</li><li>Livré en moins de 24h en fichier MP4 vidéo</li></ul>
         <a href="https://anitasuljic39-rgb.github.io/storybeat/" class="btn">Choisir</a>
       </div>
     </div>
     <div class="express">⚡ <b>Ultra-express — livrée en moins de 2h</b> : +39€, à ajouter à n'importe quelle formule.</div>
   </div></section>
 
+  <!-- PREUVE SOCIALE -->
+  <section class="proof"><div class="wrap">
+    <div class="eyebrow center"><span class="dot"></span>Ils nous ont fait confiance</div>
+    <h2 class="center" style="font-size:clamp(26px,4vw,38px);margin-bottom:8px">Des milliers d'histoires déjà chantées.</h2>
+    <div class="proof-stats">
+      <div class="stat"><div class="num">3 000+</div><div class="lab">chansons composées</div></div>
+      <div class="stat"><div class="num">98 %</div><div class="lab">de clients satisfaits</div></div>
+      <div class="stat"><div class="num">24h</div><div class="lab">de livraison</div></div>
+    </div>
+    <div class="tmoins">
+      <div class="tmoi">
+        <div class="stars">★★★★★</div>
+        <p>« Ma mère a pleuré en écoutant la chanson, c'était le plus beau cadeau que je pouvais lui offrir. Tous ceux qui l'ont écoutée ont kiffé ! Franchement vous avez assuré ! Merci. »</p>
+        <div class="who">Julie, 22 ans</div>
+      </div>
+      <div class="tmoi">
+        <div class="stars">★★★★★</div>
+        <p>« Je ne savais pas à quoi m'attendre, mais le résultat a dépassé toutes mes espérances. Toute la famille a été émue. »</p>
+        <div class="who">Martine, 56 ans</div>
+      </div>
+      <div class="tmoi">
+        <div class="stars">★★★★★</div>
+        <p>« La chanson raconte notre histoire avec une justesse incroyable. On l'écoute encore aujourd'hui avec beaucoup d'émotion. Merci. »</p>
+        <div class="who">Nicolas, 42 ans</div>
+      </div>
+      <div class="tmoi">
+        <div class="stars">★★★★★</div>
+        <p>« J'ai offert une chanson d'amour personnalisée à mon copain. Comme il écoute souvent du rap, j'avais un peu peur que le résultat fasse ringard ou ne corresponde pas à ses goûts. Finalement, j'ai été bluffée : la chanson était parfaitement dans son style et il a adoré. Je suis vraiment très contente du résultat ! »</p>
+        <div class="who">Léa, 25 ans</div>
+      </div>
+    </div>
+  </div></section>
+
   <!-- GARANTIE -->
   <section><div class="wrap narrow guarantee">
     <div class="shield">🎁</div>
-    <h2>Écoute avant de payer.</h2>
-    <p>On t'envoie d'abord un extrait de la chanson, gratuitement. Il te touche ? Tu débloques la version complète. Sinon, tu ne paies rien. Aucune raison d'hésiter.</p>
+    <h2>Satisfaite, ou remboursée.</h2>
+    <p>Après ton paiement, on t'envoie un extrait de ta chanson à valider. Il te touche ? Tu reçois la version complète. Pas convaincue ? Tu es remboursée. Aucune raison d'hésiter.</p>
   </div></section>
 
   <!-- FAQ -->
@@ -247,7 +291,7 @@
     <div class="eyebrow center"><span class="dot"></span>Questions fréquentes</div>
     <h2 class="center" style="font-size:clamp(24px,4vw,34px);margin-bottom:30px">On répond à tout.</h2>
     <details><summary>Combien de temps pour la recevoir ?</summary><p>Moins de 24h. Et si c'est pour hier, l'option Ultra-express te la livre en moins de 2h.</p></details>
-    <details><summary>Et si la chanson ne me plaît pas ?</summary><p>Tu reçois un extrait gratuit avant tout achat. Tu ne paies que si elle te plaît. Zéro risque.</p></details>
+    <details><summary>Et si la chanson ne me plaît pas ?</summary><p>Après ton achat, tu reçois d'abord un extrait à valider. S'il ne te convainc pas, tu es remboursée. Zéro risque.</p></details>
     <details><summary>Je peux choisir le style de musique ?</summary><p>Oui : pop, rap, variété, ballade, festif… Tu choisis le style et la voix.</p></details>
     <details><summary>C'est pour quelles occasions ?</summary><p>Anniversaire, amour, mariage, naissance, hommage, ou juste pour faire rire. Toutes les histoires méritent leur chanson.</p></details>
     <details><summary>Je ne sais pas quoi écrire…</summary><p>Aucun souci. Nos questions te guident pas à pas — tu coches, tu racontes en quelques mots, c'est tout.</p></details>
