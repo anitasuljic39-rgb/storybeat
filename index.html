@@ -867,6 +867,8 @@ function submit(){
     });
 }
 backBtn.onclick=back;
+const _p = new URLSearchParams(location.search).get('cat');
+if(_p){ const _f = CATS.find(c => c.key === _p); if(_f){ cat=_f; lien=null; clearData(); i=0; final=false; } }
 render();
 </script>
 </body>
