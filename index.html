@@ -176,10 +176,11 @@ const CATS=[
           { title:"L'univers musical.", sub:"On finit par le son qui lui parlera dès les premières notes.", blocks:[
             {type:"text", key:"artiste", label:"Un artiste ou une chanson que la personne adore ?", hint:"Les goûts du destinataire — pas les tiens.", ph:"Ex : Stromae, ou un truc à la Aya Nakamura"},
             {type:"choice", key:"style", label:"Pas d'artiste en tête ? Choisis un style", o:["Pop","Variété française","Rap","R&B / Soul","Ballade douce","Festif / Dansant"]},
+            {type:"choice", key:"ambiance", label:"Quelle ambiance doit transmettre la chanson ?", o:["Romantique","Joyeuse","Nostalgique","Énergique","Calme","Drôle"]},
             {type:"free", key:"musique_libre", ph:"Une 2ᵉ référence, ou une ambiance (douce, festive…)"}
           ]}
         ],
-        recap:[["qui","Le couple"],["sexe","Sexe"],["etape","Étape"],["offrant","Offert par"],["lien_libre","Lien (+)"],["moment","Le moment"],["moment_type","Type de moment"],["moment_libre","Détail (+)"],["traits","Ce qui le/la définit"],["signature","Détail signature"],["detail_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["message","Messages"],["message_libre","En tes mots"],["artiste","Artiste / chanson"],["style","Style"],["musique_libre","Musique (+)"]]
+        recap:[["qui","Le couple"],["sexe","Sexe"],["etape","Étape"],["offrant","Offert par"],["lien_libre","Lien (+)"],["moment","Le moment"],["moment_type","Type de moment"],["moment_libre","Détail (+)"],["traits","Ce qui le/la définit"],["signature","Détail signature"],["detail_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["message","Messages"],["message_libre","En tes mots"],["artiste","Artiste / chanson"],["ambiance","Ambiance"],["style","Style"],["musique_libre","Musique (+)"]]
       },
       { key:"enfant", label:"👶 Mon enfant",
         screens:[
@@ -211,10 +212,11 @@ const CATS=[
           { title:"L'univers musical.", sub:"Le son qui le / la fera sourire dès les premières notes.", blocks:[
             {type:"text", key:"artiste", label:"Une chanson ou un artiste qu'il / elle adore ?", hint:"Les goûts de l'enfant.", ph:"Ex : une chanson de dessin animé, un artiste qu'il fredonne"},
             {type:"choice", key:"style", label:"Pas d'idée ? Choisis un style", o:["Pop douce","Comptine moderne","Variété française","Ballade tendre","Festif / Joyeux","Rap doux / Slam"]},
+            {type:"choice", key:"ambiance", label:"Quelle ambiance doit transmettre la chanson ?", o:["Romantique","Joyeuse","Nostalgique","Énergique","Calme","Drôle"]},
             {type:"free", key:"musique_libre", ph:"Une 2ᵉ référence, ou une ambiance…"}
           ]}
         ],
-        recap:[["qui","L'enfant"],["sexe","Sexe"],["etape","Âge / étape"],["offrant","Offert par"],["lien_libre","Lien (+)"],["moment","Le moment"],["moment_type","Type de moment"],["moment_libre","Détail (+)"],["traits","Ce qui le/la définit"],["signature","Sa signature"],["detail_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["message","Messages"],["message_libre","En tes mots"],["artiste","Artiste / chanson"],["style","Style"],["musique_libre","Musique (+)"]]
+        recap:[["qui","L'enfant"],["sexe","Sexe"],["etape","Âge / étape"],["offrant","Offert par"],["lien_libre","Lien (+)"],["moment","Le moment"],["moment_type","Type de moment"],["moment_libre","Détail (+)"],["traits","Ce qui le/la définit"],["signature","Sa signature"],["detail_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["message","Messages"],["message_libre","En tes mots"],["artiste","Artiste / chanson"],["ambiance","Ambiance"],["style","Style"],["musique_libre","Musique (+)"]]
       },
       { key:"parent", label:"🫂 Ma mère / Mon père",
         screens:[
@@ -246,10 +248,11 @@ const CATS=[
           { title:"L'univers musical.", sub:"Le son qui le / la touchera dès les premières notes.", blocks:[
             {type:"text", key:"artiste", label:"Une chanson ou un artiste qu'il / elle aime ?", hint:"Les goûts du parent.", ph:"Ex : une chanson de sa jeunesse"},
             {type:"choice", key:"style", label:"Pas d'idée ? Choisis un style", o:["Variété française","Chanson du pays","Ballade douce","Soul / Gospel","Classique / Piano","Festif"]},
+            {type:"choice", key:"ambiance", label:"Quelle ambiance doit transmettre la chanson ?", o:["Romantique","Joyeuse","Nostalgique","Énergique","Calme","Drôle"]},
             {type:"free", key:"musique_libre", ph:"Une 2ᵉ référence, ou une ambiance…"}
           ]}
         ],
-        recap:[["parent","Le parent"],["qui","Son prénom"],["etape","Votre lien"],["offrant","Offert par"],["lien_libre","Lien (+)"],["moment","Le moment"],["moment_type","Type de moment"],["moment_libre","Détail (+)"],["traits","Ce qui le/la définit"],["signature","Sa signature"],["detail_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["message","Messages"],["message_libre","En tes mots"],["artiste","Artiste / chanson"],["style","Style"],["musique_libre","Musique (+)"]]
+        recap:[["parent","Le parent"],["qui","Son prénom"],["etape","Votre lien"],["offrant","Offert par"],["lien_libre","Lien (+)"],["moment","Le moment"],["moment_type","Type de moment"],["moment_libre","Détail (+)"],["traits","Ce qui le/la définit"],["signature","Sa signature"],["detail_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["message","Messages"],["message_libre","En tes mots"],["artiste","Artiste / chanson"],["ambiance","Ambiance"],["style","Style"],["musique_libre","Musique (+)"]]
       },
       { key:"fratrie", label:"👯 Mon frère / Ma sœur",
         screens:[
@@ -281,10 +284,11 @@ const CATS=[
           { title:"L'univers musical.", sub:"Le son qui lui ressemble.", blocks:[
             {type:"text", key:"artiste", label:"Une chanson ou un artiste qu'il / elle adore ?", hint:"Ses goûts à lui / elle.", ph:"Ex : un son que vous écoutiez ensemble"},
             {type:"choice", key:"style", label:"Pas d'idée ? Choisis un style", o:["Rap","Pop","Variété française","Festif / Dansant","R&B / Soul","Rock"]},
+            {type:"choice", key:"ambiance", label:"Quelle ambiance doit transmettre la chanson ?", o:["Romantique","Joyeuse","Nostalgique","Énergique","Calme","Drôle"]},
             {type:"free", key:"musique_libre", ph:"Une 2ᵉ référence, ou une ambiance…"}
           ]}
         ],
-        recap:[["qui","Frère / sœur"],["sexe","Sexe"],["etape","Votre lien"],["offrant","Offert par"],["lien_libre","Lien (+)"],["moment","Le moment"],["moment_type","Type de moment"],["moment_libre","Détail (+)"],["traits","Ce qui le/la définit"],["signature","Sa signature"],["detail_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["message","Messages"],["message_libre","En tes mots"],["artiste","Artiste / chanson"],["style","Style"],["musique_libre","Musique (+)"]]
+        recap:[["qui","Frère / sœur"],["sexe","Sexe"],["etape","Votre lien"],["offrant","Offert par"],["lien_libre","Lien (+)"],["moment","Le moment"],["moment_type","Type de moment"],["moment_libre","Détail (+)"],["traits","Ce qui le/la définit"],["signature","Sa signature"],["detail_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["message","Messages"],["message_libre","En tes mots"],["artiste","Artiste / chanson"],["ambiance","Ambiance"],["style","Style"],["musique_libre","Musique (+)"]]
       },
       { key:"gp", label:"👵 Mes grands-parents",
         screens:[
@@ -316,10 +320,11 @@ const CATS=[
           { title:"L'univers musical.", sub:"Le son de son époque, ou celui qui l'émeut.", blocks:[
             {type:"text", key:"artiste", label:"Une chanson ou un artiste qu'il / elle aime ?", hint:"Ses goûts à lui / elle.", ph:"Ex : une chanson de son époque"},
             {type:"choice", key:"style", label:"Pas d'idée ? Choisis un style", o:["Chanson d'autrefois","Variété française","Musique du pays","Classique / Piano","Accordéon / Musette","Douce ballade"]},
+            {type:"choice", key:"ambiance", label:"Quelle ambiance doit transmettre la chanson ?", o:["Romantique","Joyeuse","Nostalgique","Énergique","Calme","Drôle"]},
             {type:"free", key:"musique_libre", ph:"Une 2ᵉ référence, ou une ambiance…"}
           ]}
         ],
-        recap:[["gp","Grand-parent"],["qui","Petit nom"],["etape","Votre lien"],["offrant","Offert par"],["lien_libre","Lien (+)"],["moment","Le moment"],["moment_type","Type de moment"],["moment_libre","Détail (+)"],["traits","Ce qui le/la définit"],["signature","Sa signature"],["detail_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["message","Messages"],["message_libre","En tes mots"],["artiste","Artiste / chanson"],["style","Style"],["musique_libre","Musique (+)"]]
+        recap:[["gp","Grand-parent"],["qui","Petit nom"],["etape","Votre lien"],["offrant","Offert par"],["lien_libre","Lien (+)"],["moment","Le moment"],["moment_type","Type de moment"],["moment_libre","Détail (+)"],["traits","Ce qui le/la définit"],["signature","Sa signature"],["detail_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["message","Messages"],["message_libre","En tes mots"],["artiste","Artiste / chanson"],["ambiance","Ambiance"],["style","Style"],["musique_libre","Musique (+)"]]
       },
       { key:"ami", label:"🤝 Un(e) ami(e) proche",
         screens:[
@@ -351,10 +356,11 @@ const CATS=[
           { title:"L'univers musical.", sub:"Le son qui vous ressemble.", blocks:[
             {type:"text", key:"artiste", label:"Une chanson ou un artiste qu'il / elle adore ?", hint:"Ses goûts à lui / elle.", ph:"Ex : votre hymne de soirée"},
             {type:"choice", key:"style", label:"Pas d'idée ? Choisis un style", o:["Pop","Rap","Variété française","Festif / Dansant","Rock","R&B / Soul"]},
+            {type:"choice", key:"ambiance", label:"Quelle ambiance doit transmettre la chanson ?", o:["Romantique","Joyeuse","Nostalgique","Énergique","Calme","Drôle"]},
             {type:"free", key:"musique_libre", ph:"Une 2ᵉ référence, ou une ambiance…"}
           ]}
         ],
-        recap:[["qui","L'ami·e"],["sexe","Sexe"],["etape","Votre amitié"],["offrant","Offert par"],["lien_libre","Lien (+)"],["moment","Le moment"],["moment_type","Type de moment"],["moment_libre","Détail (+)"],["traits","Ce qui le/la définit"],["signature","Sa signature"],["detail_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["message","Messages"],["message_libre","En tes mots"],["artiste","Artiste / chanson"],["style","Style"],["musique_libre","Musique (+)"]]
+        recap:[["qui","L'ami·e"],["sexe","Sexe"],["etape","Votre amitié"],["offrant","Offert par"],["lien_libre","Lien (+)"],["moment","Le moment"],["moment_type","Type de moment"],["moment_libre","Détail (+)"],["traits","Ce qui le/la définit"],["signature","Sa signature"],["detail_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["message","Messages"],["message_libre","En tes mots"],["artiste","Artiste / chanson"],["ambiance","Ambiance"],["style","Style"],["musique_libre","Musique (+)"]]
       }
     ]
   },
@@ -436,10 +442,11 @@ const CATS=[
       { title:"L'univers musical.", sub:"Le son qui bercera la chanson.", blocks:[
         {type:"text", key:"artiste", label:"Une berceuse, une chanson ou un style que la famille aime ?", hint:"Les goûts des parents.", ph:"Ex : un artiste que vous adorez, une chanson que vous écoutez déjà en boucle"},
         {type:"choice", key:"style", label:"Pas d'idée ? Choisis un style", o:["Berceuse douce","Pop tendre","Variété française","Rap / Slam doux","Jazz / Soul","Classique / Piano","Folk acoustique","Comptine joyeuse"]},
+        {type:"choice", key:"ambiance", label:"Quelle ambiance doit transmettre la chanson ?", o:["Romantique","Joyeuse","Nostalgique","Énergique","Calme","Drôle"]},
         {type:"free", key:"musique_libre", ph:"Une 2ᵉ référence, ou une ambiance (douce, joyeuse…)"}
       ]}
     ],
-    recap:[["prenom","Le bébé"],["sexe","Sexe"],["de_qui","De la part de"],["offrant_prenom","Offert par"],["lien_libre","Lien (+)"],["date","Date"],["contexte","Le jour J"],["jour_libre","Jour (+)"],["arrivee","Cette arrivée"],["represente","Représente"],["arrivee_libre","Arrivée (+)"],["fratrie","Fratrie"],["fratrie_qui","Les grands"],["fratrie_libre","Fratrie (+)"],["traits","Le bébé"],["ressemble","Ressemble à"],["unique_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["voeux","Vœux"],["voeux_libre","En tes mots"],["artiste","Berceuse / artiste"],["style","Style"],["musique_libre","Musique (+)"]]
+    recap:[["prenom","Le bébé"],["sexe","Sexe"],["de_qui","De la part de"],["offrant_prenom","Offert par"],["lien_libre","Lien (+)"],["date","Date"],["contexte","Le jour J"],["jour_libre","Jour (+)"],["arrivee","Cette arrivée"],["represente","Représente"],["arrivee_libre","Arrivée (+)"],["fratrie","Fratrie"],["fratrie_qui","Les grands"],["fratrie_libre","Fratrie (+)"],["traits","Le bébé"],["ressemble","Ressemble à"],["unique_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["voeux","Vœux"],["voeux_libre","En tes mots"],["artiste","Berceuse / artiste"],["ambiance","Ambiance"],["style","Style"],["musique_libre","Musique (+)"]]
   },
 
   { key:"anniversaire", eyebrow:"🎂 Anniversaire",
@@ -477,10 +484,11 @@ const CATS=[
       { title:"L'univers musical.", sub:"Le son qui lui parlera dès les premières notes.", blocks:[
         {type:"text", key:"artiste", label:"Un artiste ou une chanson que la personne adore ?", hint:"Ses goûts à elle / lui.", ph:"Ex : un artiste qu'elle écoute en boucle"},
         {type:"choice", key:"style", label:"Pas d'idée ? Choisis un style", o:["Pop","Variété française","Rap","R&B / Soul","Rock","Festif / Dansant","Jazz / Soul","Classique"]},
+        {type:"choice", key:"ambiance", label:"Quelle ambiance doit transmettre la chanson ?", o:["Romantique","Joyeuse","Nostalgique","Énergique","Calme","Drôle"]},
         {type:"free", key:"musique_libre", ph:"Une 2ᵉ référence, ou une ambiance (festive, douce…)"}
       ]}
     ],
-    recap:[["prenom","On fête"],["sexe","C'est"],["role","De la part de"],["offrant","Offert par"],["lien_libre","Lien (+)"],["cap","Cap"],["age","Âge"],["age_libre","Âge (+)"],["moment","L'anecdote"],["traits","Ce qui la définit"],["moment_libre","En +"],["signature","Signature"],["passions","Passions"],["signature_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["message","Messages"],["message_libre","En tes mots"],["artiste","Artiste / chanson"],["style","Style"],["musique_libre","Musique (+)"]]
+    recap:[["prenom","On fête"],["sexe","C'est"],["role","De la part de"],["offrant","Offert par"],["lien_libre","Lien (+)"],["cap","Cap"],["age","Âge"],["age_libre","Âge (+)"],["moment","L'anecdote"],["traits","Ce qui la définit"],["moment_libre","En +"],["signature","Signature"],["passions","Passions"],["signature_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["message","Messages"],["message_libre","En tes mots"],["artiste","Artiste / chanson"],["ambiance","Ambiance"],["style","Style"],["musique_libre","Musique (+)"]]
   },
 
   { key:"humour", eyebrow:"😆 Humour",
@@ -595,10 +603,11 @@ const CATS=[
       { title:"L'univers musical.", sub:"Le son qui leur ressemble.", blocks:[
         {type:"text", key:"artiste", label:"Un artiste ou une chanson que le couple adore ?", hint:"Leurs goûts à eux.", ph:"Ex : leur chanson, ou un artiste qu'ils écoutent ensemble"},
         {type:"choice", key:"style", label:"Pas d'idée ? Choisis un style", o:["Pop romantique","Variété française","Soul / R&B","Ballade douce","Festif / Dansant","Classique / Piano"]},
+        {type:"choice", key:"ambiance", label:"Quelle ambiance doit transmettre la chanson ?", o:["Romantique","Joyeuse","Nostalgique","Énergique","Calme","Drôle"]},
         {type:"free", key:"musique_libre", ph:"Une 2ᵉ référence, ou une ambiance (douce, festive…)"}
       ]}
     ],
-    recap:[["prenoms","Les mariés"],["chante","Tu chantes"],["role","Ton rôle"],["offrant","Offert par"],["lien_libre","Lien (+)"],["histoire","Leur histoire"],["etape","Ils en sont où"],["histoire_libre","Histoire (+)"],["traits","Le couple"],["signature","Leur truc"],["signature_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["message","Messages"],["message_libre","En tes mots"],["jour","Le mariage"],["moment","La chanson pour"],["jour_libre","Jour (+)"],["artiste","Artiste / chanson"],["style","Style"],["musique_libre","Musique (+)"]]
+    recap:[["prenoms","Les mariés"],["chante","Tu chantes"],["role","Ton rôle"],["offrant","Offert par"],["lien_libre","Lien (+)"],["histoire","Leur histoire"],["etape","Ils en sont où"],["histoire_libre","Histoire (+)"],["traits","Le couple"],["signature","Leur truc"],["signature_libre","En +"],["emotion","Émotion"],["emotion_libre","Émotion (+)"],["message","Messages"],["message_libre","En tes mots"],["jour","Le mariage"],["moment","La chanson pour"],["jour_libre","Jour (+)"],["artiste","Artiste / chanson"],["ambiance","Ambiance"],["style","Style"],["musique_libre","Musique (+)"]]
   }
 ];
 
