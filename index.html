@@ -801,13 +801,14 @@ function buildMessage(){
 }
 
 function orderDone(){
+  const isChanson2 = new URLSearchParams(location.search).get('chanson') === '2';
   stage.innerHTML='';
   const step=document.createElement('div');step.className='step final';
   step.innerHTML=`<div class="big">🎉</div>
     <div class="eyebrow" style="justify-content:center"><span class="dot"></span>C'est envoyé</div>
     <h1>Merci ! Ta commande est bien enregistrée 🎵</h1>
     <div class="screen-sub" style="text-align:center">On a bien reçu toutes tes réponses. Livraison par mail en <b>moins de 24h</b>.</div>
-    <div class="screen-sub" style="text-align:center;margin-top:14px"><b>Dernière étape : choisis ta formule pour lancer ta chanson.</b></div>
+    ${isChanson2 ? `<div class="screen-sub" style="text-align:center;margin-top:14px"><b>C'est tout bon pour ta 2ᵉ chanson ! 🎵</b><br>Rien de plus à régler — elle est déjà réglée avec ta commande. On s'occupe du reste et tu recevras tout par email.</div>` : `<div class="screen-sub" style="text-align:center;margin-top:14px"><b>Dernière étape : choisis ta formule pour lancer ta chanson.</b></div>
     <div class="plans">
       <div class="plan">
         <div class="plan-name">Essentielle</div>
@@ -842,7 +843,7 @@ function orderDone(){
         </ul>
         <a class="btn-pay" href="https://www.storybeat.fr/premium">Choisir le Premium</a>
       </div>
-    </div>`;
+    </div>`}`;
   stage.appendChild(step);
   nav.style.display='none';
   setProgress();
