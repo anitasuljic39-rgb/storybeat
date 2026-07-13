@@ -253,10 +253,13 @@ if(window.emailjs)emailjs.init({publicKey:EMAILJS_PUBLIC_KEY});
 
 // ===== Enregistrement durable dans le carnet (EN PARALLÈLE de l'email, sans jamais bloquer) =====
 const SAVE_ENDPOINT='https://storybeat-moteur.vercel.app/api/save-questionnaire';
+// Numéro de chanson : ?chanson=2 → 2 (2ᵉ chanson / order bump), sinon 1 (1ʳᵉ chanson par défaut).
+function chansonNum(){ return (new URLSearchParams(location.search).get('chanson') === '2') ? 2 : 1; }
 function saveToCarnet(email){
   try{
     const reponses=Object.assign({}, state.answers, {
       categorie: state.linkType,        // le « Pour qui » (stocké à part dans le questionnaire)
+      chanson: chansonNum(),            // 1 = 1ʳᵉ chanson, 2 = 2ᵉ chanson (order bump)
       message_lisible: buildMessage()   // le même texte que l'email, pratique à lire dans le carnet
     });
     fetch(SAVE_ENDPOINT,{
@@ -853,6 +856,7 @@ function renderRecap(){
 
 function buildMessage(){
   const lines=[];
+  lines.push('Chanson : '+(chansonNum()===2?'2ème chanson':'1ère chanson'));
   const pour=(state.linkType==='autre'&&state.answers.link_libre)?state.answers.link_libre:(catLabels[state.linkType]||'—');
   lines.push('Pour : '+pour);
   recapRows().forEach(([k,v])=>{ if(k!=='Pour' && v) lines.push(k+' : '+v); });
