@@ -250,6 +250,24 @@ const EMAILJS_PUBLIC_KEY='u6MuSGT1tR3q8I1pb';
 const EMAILJS_SERVICE_ID='service_ehijilk';
 const EMAILJS_TEMPLATE_ID='template_hrisr2w';
 if(window.emailjs)emailjs.init({publicKey:EMAILJS_PUBLIC_KEY});
+
+// ===== Enregistrement durable dans le carnet (EN PARALLÈLE de l'email, sans jamais bloquer) =====
+const SAVE_ENDPOINT='https://storybeat-moteur.vercel.app/api/save-questionnaire';
+function saveToCarnet(email){
+  try{
+    const reponses=Object.assign({}, state.answers, {
+      categorie: state.linkType,        // le « Pour qui » (stocké à part dans le questionnaire)
+      message_lisible: buildMessage()   // le même texte que l'email, pratique à lire dans le carnet
+    });
+    fetch(SAVE_ENDPOINT,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({ email:email, reponses:reponses })
+    }).then(r=>{ if(!r.ok) console.log('[carnet] enregistrement non abouti ('+r.status+')'); })
+      .catch(err=>{ console.log('[carnet] enregistrement échoué :', err && err.message); });
+  }catch(e){ console.log('[carnet] erreur préparation :', e && e.message); }
+}
+
 function isValidEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}
 function showFormError(m){const e=document.getElementById('formerr');if(e)e.textContent=m||'';}
 
@@ -854,6 +872,7 @@ function submitFinal(){
   btn.disabled=true; btn.textContent='Envoi en cours...';
   const name=state.answers.nom||state.answers.e_nom||state.answers.p_nom||state.answers.f_nom||state.answers.g_nom||state.answers.a_nom||state.answers.u_nom||'Client';
   const params={ name:name, email:email, message:buildMessage() };
+  saveToCarnet(email);   // enregistrement carnet en parallèle — feu et oubli, n'affecte jamais l'envoi ci-dessous
   emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ID,params)
     .then(()=>{ renderPricing(); })
     .catch(err=>{ console.error('EmailJS error',err); btn.disabled=false; btn.textContent=old; showFormError("L'envoi a échoué. Vérifie ta connexion et réessaie — tes réponses sont conservées."); });
