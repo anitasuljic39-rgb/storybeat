@@ -221,6 +221,41 @@
   .btn-pay{margin-top:auto;display:block;text-align:center;background:var(--grad3);color:#fff;font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;text-decoration:none;padding:14px;border-radius:100px;box-shadow:0 10px 24px -10px rgba(255,58,168,0.5);}
   .btn-pay:active{transform:scale(0.98);}
 
+  /* ===== Écran final « Merci » : fond sombre + formules identiques à la page de vente ===== */
+  /* Fond sombre appliqué UNIQUEMENT sur l'écran de remerciement (les questions restent claires) */
+  body.sb-merci-dark{
+    background:
+      radial-gradient(120% 80% at 50% -10%, #1a1030 0%, #0a0710 55%),
+      #0a0710;
+  }
+  body.sb-merci-dark .brand{color:#ffffff;}
+  body.sb-merci-dark .cat-tag{color:#b9aecb;}
+  body.sb-merci-dark h1.q-title{color:#f4eefb;}
+  body.sb-merci-dark .q-sub{color:#b9aecb;}
+  body.sb-merci-dark .trace i{background:rgba(255,255,255,.16);}
+  body.sb-merci-dark .waveform span{background:rgba(255,255,255,.14);}
+
+  /* Formules — copie fidèle du composant de la page de vente, classes préfixées « sb- » (anti-collision) */
+  .sb-plans{display:flex;flex-direction:column;gap:22px;margin-top:26px;text-align:left;}
+  .sb-plan{position:relative;background:#231a38;border:2px solid #ff3aa8;border-radius:22px;padding:26px 22px;display:flex;flex-direction:column;}
+  .sb-plan .sb-ico{font-size:26px;margin-bottom:10px;}
+  .sb-plan .sb-name{font-family:'Sora',sans-serif;font-weight:700;letter-spacing:.16em;font-size:13px;color:#d9cfe8;margin-bottom:6px;}
+  .sb-plan .sb-price{font-family:'Sora',sans-serif;font-weight:800;font-size:40px;color:#ff2e88;margin-bottom:18px;line-height:1;}
+  .sb-plan ul{list-style:none;margin:0 0 22px;padding:0;flex:1;display:block;}
+  .sb-plan li{position:relative;padding-left:26px;margin-bottom:11px;font-size:14.5px;line-height:1.45;color:#efe8f8;}
+  .sb-plan li::before{content:"✓";position:absolute;left:0;top:0;color:#ff3aa8;font-weight:800;}
+  .sb-plan li.sb-new::before{content:"✦";color:#1fd6ff;}
+  .sb-hlv{display:flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-weight:700;font-size:13.5px;background:linear-gradient(90deg,rgba(31,214,255,.16),rgba(155,77,255,.16));border:1px solid rgba(31,214,255,.35);border-radius:10px;padding:9px 12px;margin-bottom:16px;color:#dff6ff;}
+  .sb-btn{display:block;text-align:center;font-family:'Sora',sans-serif;font-weight:800;font-size:15px;color:#fff;padding:15px;border-radius:999px;text-decoration:none;background:var(--grad3);box-shadow:0 6px 22px rgba(155,77,255,.35);}
+  .sb-btn:active{transform:scale(0.98);}
+  /* Populaire mise en avant : bordure dégradé + halo + zoom au survol + badge */
+  .sb-plan.sb-featured{border:none;transform:scale(1.03);z-index:2;animation:sb-halo 1.3s ease-in-out infinite alternate;}
+  .sb-plan.sb-featured::before{content:"";position:absolute;inset:-2px;border-radius:24px;padding:2px;background:var(--grad3);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;}
+  @keyframes sb-halo{from{box-shadow:0 0 0 0 rgba(255,58,168,0),0 10px 30px rgba(0,0,0,.3);}to{box-shadow:0 0 26px 2px rgba(255,58,168,.45),0 10px 30px rgba(0,0,0,.3);}}
+  .sb-plan.sb-featured:hover{transform:scale(1.055);transition:transform .25s ease;}
+  .sb-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);z-index:3;font-family:'Sora',sans-serif;font-weight:800;font-size:12px;letter-spacing:.06em;color:#fff;padding:6px 16px;border-radius:999px;background:var(--grad3);white-space:nowrap;box-shadow:0 6px 18px rgba(255,58,168,.4);}
+  @media(prefers-reduced-motion:reduce){.sb-plan.sb-featured{animation:none;}}
+
   ::selection{background:rgba(255,58,168,0.20);}
 </style>
 </head>
@@ -683,6 +718,7 @@ function renderWaveform(){
   });
 }
 function renderStage(){
+  document.body.classList.remove('sb-merci-dark');   // écrans de questions : fond clair
   const list = activeSteps();
   if(state.index >= list.length){ renderRecap(); return; }
   const s = list[state.index];
@@ -826,6 +862,7 @@ function recapRows(){
 }
 
 function renderRecap(){
+  document.body.classList.remove('sb-merci-dark');   // écran email : fond clair
   const stage=document.getElementById('stage'); const a=state.answers;
   document.getElementById('trace').innerHTML='';
   document.getElementById('waveform').querySelectorAll('span').forEach(s=>s.classList.add('on'));
@@ -900,28 +937,56 @@ function initCat(){
 function renderPricing(){
   const isChanson2 = new URLSearchParams(location.search).get('chanson') === '2';
   const stage=document.getElementById('stage');
+  document.body.classList.add('sb-merci-dark');   // fond sombre UNIQUEMENT sur cet écran final
   document.getElementById('trace').innerHTML='';
   document.getElementById('waveform').querySelectorAll('span').forEach(s=>s.classList.add('on'));
   const plansHTML=`
-      <div class="plans">
-        <div class="plan">
-          <div class="plan-name">Essentielle</div>
-          <div class="plan-price">29€</div>
-          <ul><li>2 couplets + refrain</li><li>2 versions au choix</li><li>Livré en moins de 24h (MP3)</li></ul>
-          <a class="btn-pay" href="https://www.storybeat.fr/essentiel">Choisir l\'Essentielle</a>
+      <div class="sb-plans">
+        <div class="sb-plan">
+          <div class="sb-ico">🎵</div>
+          <div class="sb-name">ESSENTIELLE</div>
+          <div class="sb-price">29€</div>
+          <ul>
+            <li>Une chanson personnalisée</li>
+            <li>Un extrait à valider</li>
+            <li>Fichier audio MP3</li>
+            <li>Page d\'écoute partageable</li>
+            <li>Livraison en moins de 24h</li>
+          </ul>
+          <a class="sb-btn" href="https://www.storybeat.fr/essentiel">Choisir l\'Essentielle</a>
         </div>
-        <div class="plan featured">
-          <div class="plan-badge">La plus choisie</div>
-          <div class="plan-name">Populaire</div>
-          <div class="plan-price">49€</div>
-          <ul><li>3 couplets + refrain</li><li>La voix au choix (homme ou femme)</li><li>2 versions au choix</li><li>Livré en moins de 24h (MP3)</li></ul>
-          <a class="btn-pay" href="https://www.storybeat.fr/populaire">Choisir le Populaire</a>
+        <div class="sb-plan sb-featured">
+          <span class="sb-badge">⭐ La plus choisie</span>
+          <div class="sb-ico">⭐</div>
+          <div class="sb-name">POPULAIRE</div>
+          <div class="sb-price">49€</div>
+          <ul>
+            <li>Une chanson personnalisée</li>
+            <li>Un extrait à valider</li>
+            <li>Fichier audio MP3</li>
+            <li>Page d\'écoute partageable</li>
+            <li class="sb-new">Deux versions au choix</li>
+            <li class="sb-new">Choix de la voix (homme / femme)</li>
+            <li class="sb-new">Carte personnalisée + QR code</li>
+            <li class="sb-new">Livraison express en moins de 12h</li>
+          </ul>
+          <a class="sb-btn" href="https://www.storybeat.fr/populaire">Choisir la Populaire</a>
         </div>
-        <div class="plan">
-          <div class="plan-name">Premium</div>
-          <div class="plan-price">99€</div>
-          <ul><li>3 couplets + refrain</li><li>La voix au choix</li><li>Une vidéo avec vos photos + paroles en sous-titres</li><li>Livré en moins de 24h (MP4 vidéo)</li></ul>
-          <a class="btn-pay" href="https://www.storybeat.fr/premium">Choisir le Premium</a>
+        <div class="sb-plan">
+          <div class="sb-ico">👑</div>
+          <div class="sb-name">PREMIUM</div>
+          <div class="sb-price">99€</div>
+          <div class="sb-hlv">🎬 Votre chanson devient un clip vidéo</div>
+          <ul>
+            <li class="sb-new">Un montage vidéo MP4 — vos photos &amp; vidéos</li>
+            <li>Une chanson personnalisée</li>
+            <li class="sb-new">Deux versions au choix</li>
+            <li class="sb-new">Choix de la voix (homme / femme)</li>
+            <li class="sb-new">Carte personnalisée + QR code</li>
+            <li>Page d\'écoute partageable</li>
+            <li class="sb-new">Livraison express en moins de 12h</li>
+          </ul>
+          <a class="sb-btn" href="https://www.storybeat.fr/premium">Choisir la Premium</a>
         </div>
       </div>`;
   const chanson2HTML=`<p class="q-sub" style="margin-left:auto;margin-right:auto;margin-top:14px"><b>C\'est tout bon pour ta 2ᵉ chanson ! 🎵</b><br>Rien de plus à régler — elle est déjà réglée avec ta commande. On s\'occupe du reste et tu recevras tout par email.</p>`;
