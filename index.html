@@ -246,6 +246,9 @@
   .sb-plan .sb-name{font-family:'Sora',sans-serif;font-weight:700;font-size:22px;color:#fff;margin-bottom:6px;}
   .sb-plan .sb-price{font-family:'Sora',sans-serif;font-weight:800;font-size:44px;color:#fff;margin-bottom:22px;line-height:1;}
   .sb-plan .sb-price .sb-cur{background:var(--grad3);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .sb-plan .sb-price-row{display:flex;align-items:baseline;gap:10px;white-space:nowrap;}
+  .sb-plan .sb-old-price{font-family:'Sora',sans-serif;font-weight:600;font-size:.45em;
+    color:#8b7f9c;text-decoration:line-through;text-decoration-thickness:2px;}
   .sb-plan ul{list-style:none;margin:0 0 26px;padding:0;display:flex;flex-direction:column;gap:13px;}
   .sb-plan li{display:flex;align-items:flex-start;gap:10px;font-size:15px;line-height:1.4;color:#e8e0ee;font-weight:600;}
   .sb-plan li::before{content:"✓";color:#ff3aa8;font-weight:800;flex:none;}
@@ -966,20 +969,20 @@ function renderPricing(){
       <div class="sb-plans">
         <div class="sb-plan">
           <div class="sb-ico">🎵</div><div class="sb-name">Essentielle</div>
-          <div class="sb-price"><span class="sb-cur">29€</span></div>
+          <div class="sb-price"><span class="sb-price-row"><span class="sb-old-price">49€</span><span class="sb-cur">29€</span></span></div>
           <ul><li>Une chanson personnalisée</li><li>Un extrait à valider</li><li>Fichier audio MP3</li><li>Page d\'écoute partageable</li><li>Livraison en moins de 24h</li></ul>
           <a class="sb-btn sb-ghost" href="https://www.storybeat.fr/essentiel">Choisir l\'Essentielle</a>
         </div>
         <div class="sb-plan sb-featured">
           <div class="sb-badge">La plus choisie</div>
           <div class="sb-ico">⭐</div><div class="sb-name">Populaire</div>
-          <div class="sb-price"><span class="sb-cur">49€</span></div>
+          <div class="sb-price"><span class="sb-price-row"><span class="sb-old-price">79€</span><span class="sb-cur">49€</span></span></div>
           <ul><li>Une chanson personnalisée</li><li>Un extrait à valider</li><li>Fichier audio MP3</li><li>Page d\'écoute partageable</li><li class="sb-new">Deux versions au choix</li><li class="sb-new">Choix de la voix (homme / femme)</li><li class="sb-new">Carte personnalisée + QR code</li><li class="sb-new">Livraison express en moins de 12h</li></ul>
           <a class="sb-btn sb-solid" href="https://www.storybeat.fr/populaire">Choisir la Populaire</a>
         </div>
         <div class="sb-plan">
           <div class="sb-ico">👑</div><div class="sb-name">Premium</div>
-          <div class="sb-price"><span class="sb-cur">99€</span></div>
+          <div class="sb-price"><span class="sb-price-row"><span class="sb-old-price">149€</span><span class="sb-cur">99€</span></span></div>
           <div class="sb-hlv">🎬 Votre chanson devient un clip vidéo</div>
           <ul><li class="sb-new">Un montage vidéo MP4 — vos photos &amp; vidéos</li><li>Une chanson personnalisée</li><li>Deux versions au choix</li><li>Choix de la voix (homme / femme)</li><li>Carte personnalisée + QR code</li><li>Page d\'écoute partageable</li><li>Livraison express en moins de 12h</li></ul>
           <a class="sb-btn sb-ghost" href="https://www.storybeat.fr/premium">Choisir la Premium</a>
